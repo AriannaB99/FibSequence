@@ -15,6 +15,20 @@ var para = document.createElement('p');
 para.textContent = "Slider for Fibbonacci Sequence ";
 div.appendChild(para);
 
+/*class divFib {
+    divFib(depth, fib) {
+        this.fib = fib;
+        this.Fdiv = document.createElement('div');
+        Fdiv.setAttribute('class', 'fib-item');
+        this.depth = depth;
+    }
+}
+
+{
+    div: 1,
+    val: 1
+}.div
+*/
 
 
 /*    <form id="list-of-divs">
@@ -64,7 +78,7 @@ p.textContent = 'Fib(0) = 0';
 newDiv.appendChild(p);
 
 div2.appendChild(newDiv);
-var fib = function(val) {
+/*var fib = function(val) {
     if (val == 0 ) {
         return 0;
     }
@@ -77,33 +91,89 @@ var fib = function(val) {
     return fib(val-1) + fib(val-2)
 }
 
-var recursiveBinTree = function(depth) {
-    var newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'fib-item');
-    var newP = document.createElement('p');
+var recursiveBinTree = function(divFib) {
+    //this should all be part of the class
+    //moved the creation of the div to the fibDiv class
+  /*  var newP = document.createElement('p');
     newP.textContent = `Fib(${depth}) = ${depth}`
-    newDiv.appendChild(newP);
+    newDiv.appendChild(newP);*/
 
-    if (depth === 0) {
-        return newDiv;
-    }
-    else {
-        var left = recursiveBinTree(depth -1);
+        /*var left = recursiveBinTree(new divFib(depth-1, fib(depth-1)));
         var cls = left.getAttribute('class');
         left.setAttribute('class', `fib-left ${cls}`);
-        newDiv.appendChild(left);
+        var leftP = document.createElement('p');
+        leftP.textContent  ='Fib(${left.depth}) = ${$left.fib}';
+        left.appendChild(leftP);
+        divFib.appendChild(left);
 
-        var right = recursiveBinTree( depth -1);
+        var right = recursiveBinTree(new divFib(depth-1, fib(depth-1)));
         cls = right.getAttribute('class');
         right.setAttribute('class', `fib-right ${cls}`);
-        newDiv.appendChild(right);
+        var rightP = document.createElement('p');
+        rightP.textContent  ='Fib(${right.depth}) = ${right.fib}';
+        right.appendChild(leftP);
+        divFib.appendChild(right);
 
-        return newDiv;
+        return divFib;
+*/
+var fib = function(depth){
+
+    //these are my base cases
+    if (depth == 0) {
+        let a = {
+            div: document.createElement('div'),
+            val: 0
+        }
+        p = document.createElement('p');
+        p.textContent = `Fib(${depth}) = ${a.val}`;
+        a.div.appendChild(p);
+        return a;
+
     }
+
+    if (depth == 1) {
+        let b = {
+            div: document.createElement('div'),
+            val: 1
+        }
+        p = document.createElement('p');
+        p.textContent = `Fib(${depth}) = ${b.val}`;
+        b.div.appendChild(p);
+        return b;
+
+    }
+
+    if (depth == 2) {
+        let c = {
+            div: document.createElement('div'),
+            val: 1
+        }
+        p = document.createElement('p');
+        p.textContent = `Fib(${depth}) = ${c.val}`;
+        c.div.appendChild(p);
+        return c;
+
+    }
+
+    var div = document.createElement('div');
+    left = fib(depth -1);
+    left.div.setAttribute('class', 'fib-left');
+    right = fib(depth -2);
+    right.div.setAttribute('class', 'fib-right');
+    pDiv = document.createElement('p');
+    //pDiv.textContent = `Fib(${depth}) = ${div.val}`;
+    div.appendChild(pDiv);
+    div.appendChild(left.div);
+    div.appendChild(right.div);
+    return {
+        div: div,
+        val: (left.val + right.val)
+    }
+
 }
 
+
 var listSlider = function(me) {
-    //var value = me.value;
     // Put the slider's value into the <label>
     var label = document.querySelector('#list-label');
     label.textContent = `Fib(${me.value})`;
@@ -117,7 +187,8 @@ var listSlider = function(me) {
     tree.setAttribute('id', 'tree-of-divs');
     tree.setAttribute('class', 'fib-container');
 
-    var treeObj = recursiveBinTree(me.value);
+    //intialDiv = new divFib(me.value, fib(me.value));
+    var treeObj = fib(me.value).div;
     tree.appendChild(treeObj);
 
     var theForm = document.querySelector('#list-of-divs');
