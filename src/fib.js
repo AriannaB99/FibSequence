@@ -143,25 +143,14 @@ var fib = function(depth){
 
     }
 
-    if (depth == 2) {
-        let c = {
-            div: document.createElement('div'),
-            val: 1
-        }
-        p = document.createElement('p');
-        p.textContent = `Fib(${depth}) = ${c.val}`;
-        c.div.appendChild(p);
-        return c;
-
-    }
-
     var div = document.createElement('div');
+    div.setAttribute('class', 'fib-item');
     left = fib(depth -1);
     left.div.setAttribute('class', 'fib-left');
     right = fib(depth -2);
     right.div.setAttribute('class', 'fib-right');
     pDiv = document.createElement('p');
-    //pDiv.textContent = `Fib(${depth}) = ${div.val}`;
+    pDiv.textContent = `Fib(${depth}) =`; //${left.val + right.val}`;
     div.appendChild(pDiv);
     div.appendChild(left.div);
     div.appendChild(right.div);
