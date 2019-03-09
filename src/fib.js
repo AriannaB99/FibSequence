@@ -125,6 +125,7 @@ var fib = function(depth){
             val: 0
         }
         p = document.createElement('p');
+        a.div.setAttribute('class', 'fib-item');
         p.textContent = `Fib(${depth}) = ${a.val}`;
         a.div.appendChild(p);
         return a;
@@ -137,23 +138,25 @@ var fib = function(depth){
             val: 1
         }
         p = document.createElement('p');
+        b.div.setAttribute('class', 'fib-item');
         p.textContent = `Fib(${depth}) = ${b.val}`;
         b.div.appendChild(p);
         return b;
 
     }
 
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.setAttribute('class', 'fib-item');
-    left = fib(depth -1);
-    left.div.setAttribute('class', 'fib-left');
-    right = fib(depth -2);
-    right.div.setAttribute('class', 'fib-right');
+    let left = fib(depth -1);
+    left.div.setAttribute('class', 'fib-left fib-item');
+    let right = fib(depth -2);
+    right.div.setAttribute('class', 'fib-right fib-item');
     pDiv = document.createElement('p');
-    pDiv.textContent = `Fib(${depth}) =`; //${left.val + right.val}`;
+    pDiv.textContent = `Fib(${depth}) =${left.val + right.val}`;
     div.appendChild(pDiv);
     div.appendChild(left.div);
     div.appendChild(right.div);
+    console.log(div);
     return {
         div: div,
         val: (left.val + right.val)
